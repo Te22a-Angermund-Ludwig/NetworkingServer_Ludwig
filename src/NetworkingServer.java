@@ -1,6 +1,4 @@
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -9,7 +7,7 @@ public class NetworkingServer {
         ServerSocket server = null;
         Socket client;
 
-        int portnumber = 1234;
+        int portnumber = 2469;
         if ( args.length >= 1){
             portnumber = Integer.parseInt(args[0]);
         }
@@ -28,7 +26,7 @@ public class NetworkingServer {
                 client = server.accept();
 
                 System.out.println("Connect request is accepted...");
-                String clientHost = client.getInetAdress().getHostAddress();
+                String clientHost = client.getInetAddress().getHostAddress();
                 int clientPort = client.getPort();
                 System.out.println("Client host = " + clientHost + "Client port = " + clientPort);
 
@@ -47,10 +45,10 @@ public class NetworkingServer {
 
                 }
 
-                if (msgFromCLient != null && msgFromClient.equalsIgnoreCase("bye")) {
+                if (msgFromClient != null && msgFromClient.equalsIgnoreCase("bye")) {
                     server.close();
 
-                    client.close;
+                    client.close();
                     break;
                 }
             } catch (IOException ie) {
